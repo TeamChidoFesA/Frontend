@@ -1,18 +1,34 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Navbard from './navbar/Navbard.js';
+import Slider from './slider/slider.js';
+
 import './App.css';
+
+class Headerinfo extends Component {
+  render() {
+    return (
+      <div className="container">
+          <ul>
+              <li className="active"><a href='#'><i className="fa fa-facebook fa-fw"></i></a></li>
+              <li className="active"><a href='#'><i className="fa fa-twitter fa-fw"></i></a></li>
+              <li className="active"><a href='#'><i className="fa fa-google-plus fa-fw"></i></a></li>
+              <li className="dactive"><a href="callto:5550692841"><i className="fa fa-phone fa-fw"></i> +55 50692811</a></li>
+              <li className="dactive"><a href="#"><i className="fa fa-envelope fa-fw"></i> artesano@hotmail.com</a></li>
+          </ul>
+      </div>
+    );
+  }
+}
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+      <div id="wrapper">
+        <header className="header navbar-top">
+          <Headerinfo/>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Navbard/>
+        <Slider/>
       </div>
     );
   }
