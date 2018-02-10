@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Navbard from './navbar/Navbard.js';
 import Slider from './slider/slider.js';
+import Sidebar from './body/sidebar.js';
+import Content from './body/content.js';
+import Footer from './footer/footer.js';
 
 import './App.css';
 
@@ -29,6 +32,13 @@ class App extends Component {
         </header>
         <Navbard/>
         <Slider/>
+         <div className="container">
+          <div className="row">
+            <Sidebar/>
+            <Content/>
+          </div>
+         </div>
+         <Footer/>
       </div>
     );
   }

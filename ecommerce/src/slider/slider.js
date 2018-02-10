@@ -1,35 +1,94 @@
 import React, { Component } from 'react';
-import './slider.css'
+import {
+  Carousel,
+  CarouselItem,
+  CarouselControl,
+  CarouselIndicators,
+  CarouselCaption
+} from 'reactstrap';
+
+const items = [
+  {
+    src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/paris.jpg',
+    altText: 'Slide 1',
+    caption: 'active'
+  },
+  {
+    src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/singapore.jpg',
+    altText: 'Slide 2',
+    caption: ''
+  },
+  {
+    src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/prague.jpg',
+    altText: 'Slide 3',
+    caption: ''
+  }
+];
 
 class Slider extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { activeIndex: 0 };
+    this.next = this.next.bind(this);
+    this.previous = this.previous.bind(this);
+    this.goToIndex = this.goToIndex.bind(this);
+    this.onExiting = this.onExiting.bind(this);
+    this.onExited = this.onExited.bind(this);
+  }
+
+  onExiting() {
+    this.animating = true;
+  }
+
+  onExited() {
+    this.animating = false;
+  }
+
+  next() {
+    if (this.animating) return;
+    const nextIndex = this.state.activeIndex === items.length - 1 ? 0 : this.state.activeIndex + 1;
+    this.setState({ activeIndex: nextIndex });
+  }
+
+  previous() {
+    if (this.animating) return;
+    const nextIndex = this.state.activeIndex === 0 ? items.length - 1 : this.state.activeIndex - 1;
+    this.setState({ activeIndex: nextIndex });
+  }
+
+  goToIndex(newIndex) {
+    if (this.animating) return;
+    this.setState({ activeIndex: newIndex });
+  }
+
   render() {
+    const { activeIndex } = this.state;
+
+    const slides = items.map((item) => {
+      return (
+        <CarouselItem
+          onExiting={this.onExiting}
+          onExited={this.onExited}
+          key={item.src}
+        >
+          <img src={item.src} alt={item.altText} height={300} style={{width:'100%'}}/>
+          <CarouselCaption captionText={item.caption} captionHeader={item.caption} />
+        </CarouselItem>
+      );
+    });
+
     return (
-      <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
-        <ol className="carousel-indicators">
-          <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
-        <div className="carousel-inner" role="listbox">
-          <div className="carousel-item active">
-            <img className="d-block img-fluid" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/paris.jpg" alt="First slide" height="350px" />
-          </div>
-          <div className="carousel-item">
-            <img className="d-block img-fluid" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/singapore.jpg" alt="Second slide" height="350px"/>
-          </div>
-          <div className="carousel-item">
-            <img className="d-block img-fluid" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/prague.jpg" alt="Third slide" height="350px"/>
-          </div>
-        </div>
-        <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span className="sr-only">Previous</span>
-        </a>
-        <a className="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-          <span className="carousel-control-next-icon" aria-hidden="true"></span>
-          <span className="sr-only">Next</span>
-        </a>
-      </div>
+      <Carousel
+        activeIndex={activeIndex}
+        next={this.next}
+        previous={this.previous}
+      >
+        <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
+        {slides}
+        <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
+        <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
+      </Carousel>
     );
   }
 }
