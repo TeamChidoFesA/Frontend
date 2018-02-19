@@ -55,7 +55,7 @@ class Sidebar extends Component {
 
 
     return (
-      <div className="col-md-3">
+      <div className="col-md-2">
           <div className="sidebar-wrap">
               <div className="sidebar-box">
                  <ul className="list-links">

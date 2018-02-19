@@ -1,0 +1,33 @@
+header{
+  background-color: black;
+}
+
+.navbar-top ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.navbar-top li {
+    float: right;
+    margin: 0px 6px;
+}
+
+.navbar-top li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+}
+
+.navbar-top li a:hover {
+    background-color: #333333;
+}
+
+@media screen and (max-width: 768px) {
+    .navbar-top .dactive{
+      display: none;
+    }
+}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './navbar.css';
 
 class Navbard extends Component{
     render(){
@@ -19,7 +20,7 @@ class Navbard extends Component{
 class Logo extends Component{
     render(){
       return(
-         <a className="navbar-brand" href="#"><img className="logo" src={require('../logo.svg')} width="180" height="50" alt="" /></a>
+         <a className="navbar-brand" href="#"><img className="logo" src={require('../../logo.svg')} width="180" height="50" alt="" /></a>
       );
     }
 }
@@ -68,13 +69,7 @@ class Shop extends Component{
 class User extends Component{
   render(){
     return(
-      <li className="dropdown">
-        <a href="#" className="dropdown-toggle" type="button" data-toggle="dropdown"><span><i className="fa fa-user"></i></span></a>
-        <ul className="dropdown-menu">
-          <li><a href="#">Login</a></li>
-          <li><a href="#">Register</a></li>
-        </ul>
-      </li>
+      <li><a href="#"><span><i className="fa fa-user"></i></span></a></li>
     );
   }
 }
